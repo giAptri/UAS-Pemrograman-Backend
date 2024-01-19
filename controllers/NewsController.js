@@ -1,14 +1,14 @@
 // import Model News
-const News = require("../models/news.js")
+const News = require("../models/News.js")
 // buat class NewsController
 class NewsController {
         async index(req, res) {
 
-          const News = await News.all();
+          const news = await News.all();
 
           const data = {
               message: "Menampilkan Berita",
-              data: News
+              data: news
           };
 
           res.status(200).json(data);
@@ -16,10 +16,10 @@ class NewsController {
 
       async store(req, res) {
         
-        const News = await News.create(req.body);
+        const news = await News.create(req.body);
         const data = {
             message: "Menambahkan Berita",
-            data: News,
+            data: news
         };
 
         res.status(201).json(data);
@@ -54,11 +54,11 @@ class NewsController {
       async destroy(req, res) {
         const { id } = req.params;
 
-        const News = await News.find(id);
+        const news = await News.find(id);
 
-        if (News) {
+        if (news) {
             // hapus data
-            await Student.delete(id);
+            await News.delete(id);
             const data = {
                 message: "Menghapus data berita",
             };
@@ -79,12 +79,12 @@ class NewsController {
       
         const { id } = req.params;
 
-        const News = await News.find(id);
+        const news = await News.find(id);
 
-        if (student) {
+        if (news) {
             const data = {
                 message: "Menampilkan detail berita",
-                data: News,
+                data: news,
             };
 
             res.status(200).json(data);
@@ -99,10 +99,77 @@ class NewsController {
 
       }
 
+      async search(req, res) {
+        const { title } = req.params;
+       
+        const news = await News.search(title);
+        if (news.length > 0) {
+          const data = {
+            message: "Get Resource By resource title",
+            data: news,
+          };
+          res.status(200).json(data);
+        } else {
+          const data = {
+            message: "Resource not found",
+          };
+          res.status(404).json(data);
+        }
+      }
 
+      async sport(req, res) {
+        const news = await News.sport();
 
+        if (news.length > 0) {
+            const data = {
+                message :"Get Resource",
+                data : news
+            };
+            res.status(200).json(data);
+        }
+        else {
+            const data = {
+            message : "Data is Empty",
+        };
+            res.status(200).json(data);
+        }
+      } 
 
+      async finance(req, res) {
+        const news = await News.finance();
 
+        if (news.length > 0) {
+            const data = {
+                message :"Get Resource",
+                data : news
+            };
+            res.status(200).json(data);
+        }
+        else {
+            const data = {
+            message : "Data is Empty",
+        };
+            res.status(200).json(data);
+        }
+      } 
+
+      async automotive(req, res) {
+        const news = await News.automotive();
+
+        if (news.length > 0) {
+            const data = {
+                message :"Get Resource",
+                data : news
+            };
+            res.status(200).json(data);
+        }
+        else {
+            const data = {
+            message : "Data is Empty",
+        };
+            res.status(200).json(data);
+        }
+      } 
 }
 
 // membuat object NewsController

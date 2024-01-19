@@ -12,15 +12,28 @@ class News {
       });
    }
   
-   static create(News) {
+   static find (id) {
     return new Promise((resolve, reject) => {
-        const sql = "INSERT INTO Nesw SET ?";
-        db.query(sql, News, (err, results) => {
-            resolve(this.show(results.insertId));
+        const sql = "SELECT * FROM news WHERE id = ?";
+        db.query(sql, id, (err, results) => {
+            const news = results;
+            resolve(news);
         });
     });
   }
 
+  static async create(data) {
+      const id = await new Promise((resolve, reject) => {
+
+      const sql = "INSERT INTO news SET ?";
+        db.query(sql, data, (err, results) => {
+          resolve(results.insertId);
+        });
+    });
+    
+    const news = await this.find(id);
+    return news; 
+    }
 
    static async update(id, data) {
     // update data
@@ -57,9 +70,45 @@ class News {
     });
   }
 
+  static search (title) {
+    return new Promise((resolve, reject) => {
+        const sql = "SELECT * FROM news WHERE title = ?";
+        db.query(sql, title, (err, results) => {
+            const news = results;
+            resolve(news);
+        });
+    });
+  }
 
+  static sport() {
+    return new Promise((resolve, reject) => {
+        const sql = "SELECT * FROM news WHERE category = 'sport'";
+        db.query(sql, (err, results) => {
+            const news = results;
+            resolve(news);
+        });
+    });
+  }
 
+  static finance() {
+    return new Promise((resolve, reject) => {
+        const sql = "SELECT * FROM news WHERE category = 'finance'";
+        db.query(sql, (err, results) => {
+            const news = results;
+            resolve(news);
+        });
+    });
+  }
 
+  static automotive() {
+    return new Promise((resolve, reject) => {
+        const sql = "SELECT * FROM news WHERE category = 'automotive'";
+        db.query(sql, (err, results) => {
+            const news = results;
+            resolve(news);
+        });
+    });
+  }
 }
 
 

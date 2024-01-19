@@ -16,13 +16,14 @@ router.get("/", (req, res) => {
 
 // Membuat routing news
 router.get('/news', NewsController.index);
-router.post('/News', NewsController.store);
-router.put('/News/:id', NewsController.update);
-router.delete('/News/:id', NewsController.destroy);
-router.get('/News/:id', NewsController.show);
-router.get('/News/search/:title', NewsController.search);
-router.get('/News/category/sport', NewsController.sport);
-router.get('/News/category/finance', NewsController.finance);
-router.get('/News/category/automotive', NewsController.automotive);
+router.post('/news', NewsController.store);
+router.put('/news/:id', NewsController.update);
+router.delete('/news/:id', NewsController.destroy);
+router.get('/news/:id', NewsController.show);
+router.get('/news/search/:title', NewsController.search);
+router.get('/news/category/sport', NewsController.sport);
+router.get('/news/category/finance', NewsController.finance);
+router.get('/news/category/automotive', NewsController.automotive);
+
 // export router
 module.exports = router;
